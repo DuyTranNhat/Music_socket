@@ -1,0 +1,539 @@
+:root {
+    --primary-color: #212529;
+    --text-color: #333;
+    --tran-05: all 0.3s ease;
+  }
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.player {
+  position: relative;
+  width: 480px;
+}
+
+.playlist-block {
+  min-width: 370px;
+}
+
+.player .icon-pause {
+  display: none;
+}
+
+.player.playing .icon-pause {
+  display: inline-block;
+}
+
+.player.playing .icon-play {
+  display: none;
+}
+
+.dashboard {
+  padding: 16px 16px 14px;
+  background-color: #fff;
+  position: fixed;
+  top: 74px;
+  width: 100%;
+  max-width: 480px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+header h4 {
+  color: var(--primary-color);
+  font-size: 12px;
+}
+
+header h2 {
+  color: var(--text-color);
+  font-size: 20px;
+}
+
+/* CD */
+.cd {
+  display: flex;
+  margin: auto;
+  width: 200px;
+}
+
+.cd-thumb {
+  width: 100%;
+  padding-top: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  background-size: cover;
+  margin: auto;
+}
+
+/* CONTROL */
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 18px 0 8px 0;
+}
+
+.control .btn {
+  color: #666;
+  padding: 18px;
+  font-size: 18px;
+}
+
+.control .btn.active {
+  color: var(--primary-color);
+}
+
+.control .btn-toggle-play {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 24px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+}
+
+.progress {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 6px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 6px;
+  background-color: var(--primary-color);
+  cursor: pointer;
+}
+
+/* PLAYLIST */
+.playlist {
+  margin-top: 482px;
+  padding: 12px;
+}
+
+.song {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  background-color: #fff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.song.active {
+  background-color: var(--primary-color);
+}
+
+.song:active {
+  opacity: 0.8;
+}
+
+.song .option {
+  z-index: 10;
+}
+
+.song.active .option,
+.song.active .author,
+.song.active .title {
+  color: #fff;
+}
+
+
+
+.song .thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-size: cover;
+  margin: 0 8px;
+}
+
+.song .body {
+  flex: 1;
+  padding: 0 16px;
+}
+
+.song .title {
+  font-size: 18px;
+  color: var(--text-color);
+}
+
+.song .author {
+  font-size: 12px;
+  color: #999;
+}
+
+.song .option {
+  padding: 16px 8px;
+  color: #999;
+  font-size: 18px;
+}
+
+.container-fluid.custom {
+  margin-top: 75px;
+}
+
+.content-wrapper {
+  margin-left: 100px;
+}
+
+/* playlist user */
+.song-item {
+  margin-bottom: 20px;
+}
+.song-title {
+  margin: 0;
+  color: #333;
+}
+.song-details {
+  margin: 5px 0;
+  color: #666;
+}
+.audio-player {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.playlist-block {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  height: fit-content;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* .option {
+  position: absolute;
+  right: 28px;
+} */
+
+.heart-wrapper {
+  color: #333;
+  cursor: pointer;
+}
+
+.heart-wrapper:active {
+  color: red;
+}
+
+.option-wrapper {
+  position: absolute;
+  left: 0;
+  z-index: 100;
+  opacity: 0;
+  width: 0;
+  transition: var(--tran-05);
+}
+
+.option1.open .option-wrapper {
+  opacity: 1;
+  width: 300px;
+}
+
+.add-playlist-over__wrapper,
+.option-playlist-over__wrapper {
+  border-radius: 16px;
+  min-width: 200px;
+  min-height: 300px;
+  padding: 32px;
+}
+
+
+#modal-delete-room.open,
+.add-playlist-over.open,
+.option-playlist-over.open {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+#modal-delete-room.open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+
+#modal-playlist-songs.open {
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+#modal-delete-room__wrapper,
+.add-playlist-over__wrapper,
+.option-playlist-over__wrapper {
+  display: none;
+}
+
+#modal-playlist-songs > .row {
+  display: none !important;
+}
+
+
+#modal-playlist-songs.open > .row {
+  display: flex !important;
+}
+
+#modal-delete-room.open > #modal-delete-room__wrapper,
+#modal-playlist-songs.open > #modal-playlist-songs-wrapper,
+.add-playlist-over.open > .add-playlist-over__wrapper,
+.option-playlist-over.open > .option-playlist-over__wrapper {
+  display: block;
+}
+
+.bg-add-playlist {
+  opacity: 0.3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d5d5d5;
+  height: 200px;
+  width: 200px;
+}
+
+.bg-add-playlist:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.icon-addplaylist-wrapper {
+  font-size: 54px;
+  opacity: 0.5;
+}
+
+.wrapper-room {
+  background-color: #ecf0f4;
+  padding: 16px;
+}
+
+.user-item-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.user-item-wrapper ~ .user-item-wrapper {
+  margin-top: 16px;
+}
+
+.user-item__img {
+  margin-right: 8px;
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.title {
+  font-size: 22px;
+}
+
+.room-live-playlist {
+  opacity: 0;
+}
+
+
+.wrapper-room-user {
+  display: none;
+}
+
+.live-room-container.attend .wrapper-room-user {
+  display: block;
+}
+
+.live-room-container.attend .room-live-playlist {
+  opacity: 1;
+}
+
+.live-room-container.attend .wrapper-room-list {
+  display: none;
+}
+
+#playlist-home {
+  display: none !important;
+}
+
+.live-room-container.attend #playlist-home {
+  display: flex !important;
+}
+
+
+.role-user {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background-color: #0d6efd;
+  padding: 4px 18px;
+  border-radius: 4px 14px;
+}
+
+.asign-role-wrapper {
+  position: relative;
+}
+
+.asign-role-wrapper__option {
+  padding-left: 0;
+  position: absolute;
+  min-width: 152px;
+  bottom: 38px;
+  right: -1px;
+  box-shadow: 10px 10px 5px #888888;
+  z-index: 1000;
+  background-color: #fff;
+  list-style-type: none;
+  border-radius: 10px;
+  display: none;
+}
+
+.open.asign-role-wrapper >
+.asign-role-wrapper__option {
+  display: block;
+}
+
+.asign-role-wrapper__option > li {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 12px;
+}
+
+.asign-role-title {
+  background-color: #0d6efd;
+} 
+
+.asign-role-item {
+  color: #000;
+}
+
+.asign-role-item:hover {
+  opacity: 0.5;
+  color: #0d6efd;
+}
+
+.add-room-wrapper {
+  position: absolute;
+  z-index: 1;
+  top: -100%;
+  right: -76%;
+  opacity: 0;
+  transition: all 0.4s ease;
+  box-shadow: 10px 10px 5px #888888;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.add-room-wrapper.open {
+  top: 0;
+  opacity: 1;
+}
+
+.btn-add-room {
+  position: relative;
+  z-index: 100;
+}
+
+
+
+.add-room-wrapper_title {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.wrapper-room.wrapper-room-list{
+  z-index: 100;
+  width: 420px;
+  position: relative;
+}
+
+#sidebar-wrapper {
+  display: none;
+}
+
+#sidebar-wrapper.login--sucess {
+  display: block;
+}
+
+.theme-login {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  margin-left: -12px;
+  width: 100%;
+}
+
+.login-page {
+  padding: 52px;
+  display: block;
+}
+
+.login-page.login--success {
+  display: none;
+}
+
+.login-wrapper-deco {
+  background-color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(51, 62, 73, 0.1);
+  border-radius: 16px;
+}
+
+#form-login {
+  min-width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 160px;
+  box-shadow: none;
+}
+
+.wrapper-body.login--success  .login-page {
+  display: none;
+}
+
+.wrapper-body.login--success #sidebar-wrapper {
+  display: block
+}
+
+#search-form:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

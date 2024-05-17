@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music player</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    
+    <link href="{{ url_for('static', path='/css/bootstrap-icons.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', path='/css/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/css/custom.css') }}" rel="stylesheet">
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav
+      class="mainnav shadow navbar-expand-lg navbar navbar-dark bg-dark fixed-top"
+      style="min-width: 350px"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <i class="bi bi-soundwave"></i> Soundwave
+          <div style="font-size: 13px">Unleash your potential</div>
+        </a>
+
+        <div>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+            />
+            <span
+              class="bg-black fw-bold border-0 input-group-text"
+              id="basic-addon2"
+              ><i class="bi bi-search"></i
+            ></span>
+          </div>
+        </div>
+
+        <div class="text-white h4 mx-3">
+          <a href="">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="">
+            <i class="bi bi-twitter"></i>
+          </a>
+          <a href="">
+            <i class="bi bi-instagram"></i>
+          </a>
+        </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Explorer</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Discover</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Trending</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">New</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Genre
+              </a>
+              <ul
+                class="dropdown-menu bg-dark"
+                aria-labelledby="navbarDropdown"
+              >
+                <li><a class="dropdown-item text-white" href="#">Pop</a></li>
+                <li><a class="dropdown-item text-white" href="#">R&B</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item text-white" href="#">Country</a>
+                </li>
+              </ul>
+            </li>
+
+            <img
+              class="rounded-circle"
+              src="images/06.jpg"
+              style="width: 40px; height: 40px"
+            />
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Hi, John
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end bg-dark"
+                aria-labelledby="navbarDropdown"
+              >
+                <li>
+                  <a class="dropdown-item text-white" href="#"
+                    ><i class="bi bi-person"></i> Profile</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item text-white" href="#"
+                    ><i class="bi bi-gear"></i> Settings</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item text-white" href="#"
+                    ><i class="bi bi-box-arrow-right"></i> Logout</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End navbar -->
+
+    <div class="container-fluid custom">
+      <div class="row flex-nowrap">
+        
+        
+        <!-- sidebar -->
+          <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+              <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                  <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                      <span class="fs-5 d-none d-sm-inline">Menu</span>
+                  </a>
+                  <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                      <li class="nav-item">
+                          <a href="#" class="nav-link align-middle px-0">
+                              <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Explorer</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                              <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+                          <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                              <li class="w-100">
+                                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Room</span> 1 </a>
+                              </li>
+                              <li>
+                                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li>
+                          <a href="#" class="nav-link px-0 align-middle">
+                              <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+                      </li>
+                      <li>
+                          <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                              <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
+                          <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                              <li class="w-100">
+                                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
+                              </li>
+                              <li>
+                                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li>
+                          <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                              <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
+                              <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                              <li class="w-100">
+                                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
+                              </li>
+                              <li>
+                                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
+                              </li>
+                              <li>
+                                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
+                              </li>
+                              <li>
+                                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li>
+                          <a href="#" class="nav-link px-0 align-middle">
+                              <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+                      </li>
+                  </ul>
+                  <hr>
+                  <div class="dropdown pb-4">
+                      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                          <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                          <span class="d-none d-sm-inline mx-1">loser</span>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                          <li><a class="dropdown-item" href="#">New project...</a></li>
+                          <li><a class="dropdown-item" href="#">Settings</a></li>
+                          <li><a class="dropdown-item" href="#">Profile</a></li>
+                          <li>
+                              <hr class="dropdown-divider">
+                          </li>
+                          <li><a class="dropdown-item" href="#">Sign out</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <!-- end sidebar -->
+
+          <!-- content -->
+          <div class="col py-3">
+             
+            <div class="content-wrapper" >
+              <div class="row" >
+                <!-- music block -->
+                <div class="col-6 " >
+                  <div class="player">
+                    <!-- Dashboard -->
+                    <div class="dashboard">
+                      <!-- Header -->
+                      <header>
+                        <h4>Now playing:</h4>
+                        <h2>String 57th & 9th</h2>
+                      </header>
+        
+                      <!-- CD -->
+                      <div class="cd">
+                        <div
+                          class="cd-thumb"
+                          style="
+                            background-image: url('https://i.ytimg.com/vi/jTLhQf5KJSc/maxresdefault.jpg');
+                          "
+                        ></div>
+                      </div>
+        
+                      <!-- Control -->
+                      <div class="control">
+                        <div class="btn btn-repeat">
+                          <i class="fas fa-redo"></i>
+                        </div>
+                        <div class="btn btn-prev">
+                          <i class="fas fa-step-backward"></i>
+                        </div>
+                        <div class="btn btn-toggle-play">
+                          <i class="fas fa-pause icon-pause"></i>
+                          <i class="fas fa-play icon-play"></i>
+                        </div>
+                        <div class="btn btn-next">
+                          <i class="fas fa-step-forward"></i>
+                        </div>
+                        <div class="btn btn-random">
+                          <i class="fas fa-random"></i>
+                        </div>
+                      </div>
+        
+                      <input
+                        id="progress"
+                        class="progress"
+                        type="range"
+                        value="0"
+                        step="1"
+                        min="0"
+                        max="100"
+                      />
+        
+                      <audio id="audio" src=""></audio>
+                    </div>
+        
+                    <!-- Playlist -->
+                    <div class="playlist">
+                      <div class="song">
+                        <div
+                          class="thumb"
+                          style="
+                            background-image: url('https://i.ytimg.com/vi/jTLhQf5KJSc/maxresdefault.jpg');
+                          "
+                        ></div>
+                        <div class="body">
+                          <h3 class="title">Music name</h3>
+                          <p class="author">Singer</p>
+                        </div>
+                        <div class="option">
+                          <i class="fas fa-ellipsis-h"></i>
+                        </div>
+                      </div>
+
+                      <div class="song">
+                        <div
+                          class="thumb"
+                          style="
+                            background-image: url('https://i.ytimg.com/vi/jTLhQf5KJSc/maxresdefault.jpg');
+                          "
+                        ></div>
+                        <div class="body">
+                          <h3 class="title">Music name</h3>
+                          <p class="author">Singer</p>
+                        </div>
+                        <div class="option">
+                          <i class="fas fa-ellipsis-h"></i>
+                        </div>
+                      </div>
+
+                      <div class="song">
+                        <div
+                          class="thumb"
+                          style="
+                            background-image: url('https://i.ytimg.com/vi/jTLhQf5KJSc/maxresdefault.jpg');
+                          "
+                        ></div>
+                        <div class="body">
+                          <h3 class="title">Music name</h3>
+                          <p class="author">Singer</p>
+                        </div>
+                        <div class="option">
+                          <i class="fas fa-ellipsis-h"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end music block -->
+
+                <!-- start category area-->
+                <div class="col-6" >
+                  <section class="pt-2 p-4 mx-5 d-flex justify-content-center" style="flex-wrap: wrap;">
+                    <!--song card start-->
+                    <div class="m-4" style="width: 200px;">
+                      <div style="position: relative;">
+                        <img src="images/04.jpg" class="big-song-img rounded w-100 img-fluid" >
+                        <a href="#">
+                          <div class="big-song-hover " >
+                            <i class="h1 bi bi-play"></i>
+                          </div>
+                        </a>
+                        </div>
+                      <div>
+                        <div class="lead fw-bold">My love</div>
+                        <small class="text-muted">Song description</small>
+                      </div>
+                    </div>
+                    <!--song card end-->
+              
+                    <!--song card start-->
+                    <div class="m-4" style="width: 200px;">
+                      <div style="position: relative;">
+                        <img src="images/05.jpg" class="big-song-img rounded img-fluid" >
+                        <a href="#">
+                          <div class="big-song-hover " >
+                            <i class="h1 bi bi-play"></i>
+                          </div>
+                        </a>
+                        </div>
+                      <div>
+                        <div class="lead fw-bold">East river dale</div>
+                        <small class="text-muted">Song description</small>
+                      </div>
+                    </div>
+                    <!--song card end-->
+              
+                    <!--song card start-->
+                    <div class="m-4" style="width: 200px;">
+                      <div style="position: relative;">
+                        <img src="images/06.jpg" class="big-song-img rounded img-fluid" >
+                        <a href="#">
+                          <div class="big-song-hover " >
+                            <i class="h1 bi bi-play"></i>
+                          </div>
+                        </a>
+                        </div>
+                      <div>
+                        <div class="lead fw-bold">Never coming home</div>
+                        <small class="text-muted">Song description</small>
+                      </div>
+                    </div>
+                    <!--song card end-->
+              
+                    <!--song card start-->
+                    <div class="m-4" style="width: 200px;">
+                      <div style="position: relative;">
+                        <img src="images/07.jpg" class="big-song-img rounded img-fluid" >
+                        <a href="#">
+                          <div class="big-song-hover " >
+                            <i class="h1 bi bi-play"></i>
+                          </div>
+                        </a>
+                        </div>
+                      <div>
+                        <div class="lead fw-bold">Bye bye baby</div>
+                        <small class="text-muted">Song description</small>
+                      </div>
+                    </div>
+                    <!--song card end-->
+              
+                    <!--song card start-->
+                    <div class="m-4" style="width: 200px;">
+                      <div style="position: relative;">
+                        <img src="images/08.jpg" class="big-song-img rounded img-fluid" >
+                        <a href="#">
+                          <div class="big-song-hover " >
+                            <i class="h1 bi bi-play"></i>
+                          </div>
+                        </a>
+                        </div>
+                      <div>
+                        <div class="lead fw-bold">Chicken run</div>
+                        <small class="text-muted">Song description</small>
+                      </div>
+                    </div>
+                    <!--song card end-->
+              
+                    <!--song card start-->
+                    <div class="m-4" style="width: 200px;">
+                      <div style="position: relative;">
+                        <img src="images/09.jpg" class="big-song-img rounded img-fluid" >
+                        <a href="#">
+                          <div class="big-song-hover " >
+                            <i class="h1 bi bi-play"></i>
+                          </div>
+                        </a>
+                        </div>
+                      <div>
+                        <div class="lead fw-bold">End of the road</div>
+                        <small class="text-muted">Song description</small>
+                      </div>
+                    </div>
+                    <!--song card end-->
+              
+                    <!--song card start-->
+                    <div class="m-4" style="width: 200px;">
+                      <div style="position: relative;">
+                        <img src="images/11.jpg" class="big-song-img rounded img-fluid" >
+                        <a href="#">
+                          <div class="big-song-hover " >
+                            <i class="h1 bi bi-play"></i>
+                          </div>
+                        </a>
+                        </div>
+                      <div>
+                        <div class="lead fw-bold">Jail aint good</div>
+                        <small class="text-muted">Song description</small>
+                      </div>
+                    </div>
+                    <!--song card end-->
+              
+                    <!--song card start-->
+                    <div class="m-4" style="width: 200px;">
+                      <div style="position: relative;">
+                        <img src="images/13.jpg" class="big-song-img rounded img-fluid" >
+                        <a href="#">
+                          <div class="big-song-hover " >
+                            <i class="h1 bi bi-play"></i>
+                          </div>
+                        </a>
+                        </div>
+                      <div>
+                        <div class="lead fw-bold">Fix my bike</div>
+                        <small class="text-muted">Song description</small>
+                      </div>
+                    </div>
+                    <!--song card end-->
+              
+                    <!--song card start-->
+                    <div class="m-4" style="width: 200px;">
+                      <div style="position: relative;">
+                        <img src="images/14.jpg" class="big-song-img rounded img-fluid" >
+                        <a href="#">
+                          <div class="big-song-hover " >
+                            <i class="h1 bi bi-play"></i>
+                          </div>
+                        </a>
+                        </div>
+                      <div>
+                        <div class="lead fw-bold">Journey to the end</div>
+                        <small class="text-muted">Song description</small>
+                      </div>
+                    </div>
+                    <!--song card end-->
+                  </section>
+                </div>
+                <!-- end category area-->
+              </div>
+            </div>
+
+
+        </div>
+          <!--end content -->
+
+
+
+          </div>
+      </div>
+  </div>
+
+    <!--end navigation-->
+  </body>
+
+  <script src="js/handleData.js" ></script>
+  <script src="{{ url_for('static', path='/js/handlePlayingMusic.js') }}"></script>
+</html>

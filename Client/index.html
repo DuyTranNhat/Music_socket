@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music player</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+      />
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/detect.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css " />
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <link rel="stylesheet" type="text/css" href="css/phantrang.css">
+  </head>
+  <body>
+    <div id="modal">
+      <ul>
+        <li>L</li>
+        <li>O</li>
+        <li>A</li>
+        <li>D</li>
+        <li>I</li>
+        <li>N</li>
+        <li>G</li>
+      </ul>
+      <small class="loading-text text-center font-italic">Công tác này sẽ mất một ít phút. Vui lòng chờ đợi!...</small>
+      <button class="cancel-detection-btn btn btn-danger" id="btn-cancel-detect">HỦY</button>
+  </div>
+  
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Xác Nhận Xóa ?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Xóa sẽ không phục hồi được
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" id="confirm-delete-songPL" class="btn btn-primary">Tôi đồng ý</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast-wrapepr" ></div>
+
+
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 11; margin-top: 60px;">
+      <div id="toast" class="toast hide p-3" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="me-auto" id="titile-toast" style="font-size: 20px;">Toast Title</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="message-toast" style="font-size: 18px;">
+        </div>
+      </div>
+    </div>
+
+
+    <!-- navbar -->
+    <nav
+      class="mainnav shadow navbar-expand-lg navbar navbar-dark bg-dark fixed-top"
+      style="min-width: 350px"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <i class="bi bi-soundwave"></i> Soundwave
+          <div style="font-size: 13px">Unleash your potential</div>
+        </a>
+
+        <div>
+          <div class="input-group">
+            
+            <input
+              type="text"
+              class="form-control"
+              id="search-input"
+              placeholder="Search"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+            />
+            <form action="" id="search-form">
+              <span
+              style="height: 42px; 
+              color: #fff;"
+              class="bg-black fw-bold border-0 input-group-text"
+              id="basic-addon2"
+              onclick="searchSongs()"
+              ><i class="bi bi-search"></i
+            ></span>
+            </form>
+          </div>
+        </div>
+
+        <div class="text-white h4 mx-3">
+          <a href="">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="">
+            <i class="bi bi-twitter"></i>
+          </a>
+          <a href="">
+            <i class="bi bi-instagram"></i>
+          </a>
+        </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Music</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Favorite</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Trending</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Live</a>
+            </li>
+
+            <!-- login checked -->
+            <!-- <img
+              class="rounded-circle"
+              src="images/06.jpg"
+              style="width: 40px; height: 40px"
+            />
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Hi, John
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end bg-dark"
+                aria-labelledby="navbarDropdown"
+              >
+                <li>
+                  <a class="dropdown-item text-white" href="#"
+                    ><i class="bi bi-person"></i> Profile</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item text-white" href="#"
+                    ><i class="bi bi-gear"></i> Settings</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item text-white" href="#"
+                    ><i class="bi bi-box-arrow-right"></i> Logout</a
+                  >
+                </li>
+              </ul>
+            </li> -->
+
+            <div id="login-wrapper"  class="d-flex" >
+              
+            </div>
+
+            <!-- end login checked -->
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End navbar -->
+
+    <div class="container-fluid custom wrapper-body">
+      <div class="row flex-nowrap" style="margin-left: -24px; margin-right: -24px;">
+
+        <div class="login-page" >
+          <div class="row login-wrapper-deco">
+            <div class="col-6" >
+                <img src="./images/login_img.jpg" alt="" class="theme-login">
+            </div>
+            <div class="col-6" >
+              <form action="" method="POST" class="form" id="form-login">
+
+                <div class="spacer"></div>
+              
+                <h2 style="color: #dd0570;" class="mb-5" > Music - Tài năng - Phong cách</h2>
+                <div class="form-group">
+                  <label for="email" class="form-label">Tên Đăng Nhập</label>
+                  <input rules="require|email" name="email" type="text" placeholder="Tài khoản của bạn..." class="form-control email">
+                  <span class="form-message"></span>
+                </div>
+              
+                <div class="form-group">
+                  <label for="password" class="form-label">Mật khẩu</label>
+                  <input rules="require|min:6" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control password">
+                  <span class="form-message"></span>
+                </div>
+              
+                <button id="btn" class="form-submit" style="background-color: #dd0570;">Đăng nhập</button>
+                <span class="mt-2">Already have an account? </span><a style="color: #dd0570; font-weight: bold;" class="mt-2" >Sign in</a>
+              </form>
+              </div>
+           </div>
+          </div>
+
+        
+        
+        <!-- sidebar -->
+
+          <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark" id="sidebar-wrapper">
+              <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                  <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                      <span class="fs-5 d-none d-sm-inline">Menu</span>
+                  </a>  
+                  <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                      <li class="nav-item" id="sidebar-music">
+                          <a href="#" class="nav-link align-middle px-0">
+                               <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Music</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#submenu1" id="sidebar-favorite" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                              <i class="fs-4 bi bi-heart"></i> <span class="ms-1 d-none d-sm-inline">Favorite</span> </a>
+                      </li>
+                      <li>
+                          <a href="#" id="sidebar-live" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi bi-file-music-fill"></i><span class="ms-1 d-none d-sm-inline">Live</span></a>
+                      </li>
+                   
+                      <li>
+                          <a href="#" id="sidebar-detect" class="nav-link px-0 align-middle">
+                              <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Object Detection</span> </a>
+                      </li>
+                  </ul>
+                  <hr>
+                  <div class="dropdown pb-4">
+                      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                          <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                          <span class="d-none d-sm-inline mx-1">loser</span>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                          <li><a class="dropdown-item" href="#">New project...</a></li>
+                          <li><a class="dropdown-item" href="#">Settings</a></li>
+                          <li><a class="dropdown-item" href="#">Profile</a></li>
+                          <li>
+                              <hr class="dropdown-divider">
+                          </li>
+                          <li><a class="dropdown-item" href="#">Sign out</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <!-- end sidebar -->
+
+          <!-- content -->
+          <div class="col py-3">
+             
+            <div id="content-wrapper" >
+            </div>
+
+
+        </div>
+          <!--end content -->
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+    
+    <div class="option-playlist-over d-flex justify-content-center align-items-center" >
+      <div class="bg-white option-playlist-over__wrapper" > 
+        <h2 >Chọn playlist mà bạn muốn thêm vào</h2>  
+        
+        
+        <select id="option-addSongToPlaylist-wrapper" class="form-select form-select-sm" aria-label=".form-select-sm example">
+
+        </select>
+        
+        <button id="add-song-playlist-btn" class="btn btn-success mt-5 w-100" >Chọn & Thêm</button>
+      </div>
+    </div>
+
+    <div class="add-playlist-over d-flex justify-content-center align-items-center" >
+      <div class="bg-white add-playlist-over__wrapper" > 
+        <form class="row g-3" id="playlistForm">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Tên Playlist</label>
+            <input type="email" class="form-control" id="playlistName" placeholder="name playlist">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Mô tả Playlist</label>
+            <textarea style="min-height: 200px;" class="form-control" id="playlistDescription" rows="3"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Album Description</label>
+            <input class="form-control" type="file" id="playlistImage">
+          </form> 
+          <div class="mb-3 mt-5">
+            <button id="submitCreatePlaylist" type="submit" class="w-100 btn btn-success mb-3">Tạo Playlist</button>
+          </div>
+      </div>
+    </div>
+
+    <div id="modal-playlist-songs" class="">
+      <div class="" id="modal-playlist-songs-wrapper">
+
+      </div>
+    </div>
+
+    <div id="modal-delete-room" class="">
+      <div class="" id="modal-delete-room__wrapper">
+
+        <form id="delete-room-form" style="
+            background: white;
+            min-width: 430px;
+            height: 240px;
+            padding: 44px;
+        " >
+          <div class="form-group bg-white" id="form-delete-room" style="min-width: 300px;">
+            <h3 for="exampleInputEmail1">Chọn phòng mà bạn muốn delete</h3>
+            <select class="form-select" aria-label="Default select example" id="modal-delete-room__select">
+           
+            </select>
+          </div>
+          <div class="d-flex justify-content-center" >
+            <button type="submit" class="btn btn-danger p-3">Xác nhận xóa phòng trên</button>
+          </div>
+        </form>
+          
+      </div>
+    </div>
+
+    <!-- <div class="col-md-6 container border">
+      <h1>Video Streaming</h1>
+      <kbd>Chọn một video</kbd>
+      <form method="POST" id="uploadForm" enctype="multipart/form-data">
+          <div class="form-group">
+              <input type="file" class="form-control" id="video" name="video" accept="video/*">
+          </div>
+          <div class="form-group">
+              <input type="submit" class="form-control bg-info text-white" value="Upload">
+          </div>
+
+          
+      </form>
+
+     
+    </div> -->
+
+    <!--end navigation-->
+    <script src="js/detect.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js" integrity="sha512-luMnTJZ7oEchNDZAtQhgjomP1eZefnl82ruTH/3Oj/Yu5qYtwL7+dVRccACS/Snp1lFXq188XFipHKYE75IaQQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/datas.js" ></script>
+    <script src="js/sockets.js" ></script>
+    <script src="js/eventRender.js" ></script>
+    <script src="js/callAPI.js" ></script>
+    <script src="js/handlePlayingMusic.js"></script>
+    <script src="js/main.js" ></script>
+  </body>
+
+
+</html>

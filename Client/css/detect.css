@@ -1,0 +1,127 @@
+#modal {
+    display: none; 
+    background-color: rgb(0, 0, 0, 0.5); 
+    position: fixed; 
+    top: 0; 
+    bottom: 0; 
+    right: 0; 
+    left: 0; 
+    z-index:100
+}
+
+#modal ul {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#modal ul li {
+    list-style: none;
+    color: #fff;
+    font-size: 40px;
+    animation: animate 1.4s linear infinite;
+}
+
+@keyframes animate {
+    0%
+    {
+        transform: translateY(0);
+    }
+    60%
+    {
+        transform: translateY(0);
+    }
+    80%
+    {
+        transform: translateY(-20px);
+    }
+    100%
+    {
+        transform: translateY(0px);
+    }
+}
+
+#modal ul li:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+#modal ul li:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+#modal ul li:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+#modal ul li:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+#modal ul li:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+#modal ul li:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+#modal ul li:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+.loading-text {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 16px;
+    color: #fff;
+}
+
+.cancel-detection-btn {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.container-content {
+    overflow-y: scroll;
+    height: 350px;
+}
+
+.container-content dl{
+    padding: 5px;
+}
+
+.yolo-section {
+    padding-top: 5px;
+    margin-bottom: 0;
+}
+
+.guide-img {
+    width: 70%;
+    display: block;
+    margin: 10px 0;
+}
+
+#selectDetectionTypeForm {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-detection-type {
+    margin: 4px;
+}
+
+.btn-group {
+    display: flex;
+}
+
+.btn-group button{
+    flex: 1;
+}
